@@ -105,28 +105,28 @@ def battle(name, ename, edesc, maxhp, emaxhp, cdf, ecdf, cpow, ecpow, maxmp, ema
                     print(f"Flames burst from within {ename}! They have been inflicted with the burn status effect!")
                 if effect == "freeze":
                     print(f"{ename} has inflicted with freeze status effect!")
-    else:
-        if random.randint(0, 10) <= 7:
-            #The enemy attacks!
-            move = input("The enemy attacks! Pick a direction to parry, head, chest, flank, or low.")
-            enemyMove = random.choice(["head", "chest", "flank", "low"])
-            print(f"You parry {move}!")
-            print(f"The enemy attacks {enemyMove}")
-            dmg = int(max(3, pow * random.choice([1, 1, 1, 1, 1, 1, 1, 1, 1, 2]) - edf) + random.randrange(-3.9, 4.0))
-            if move.lower() in parry[move]["wins"]:
-                print(f"You parry successfully!")
-            elif move.lower() in parry[enemyMove]["draw"]:
-                if random.randint(0, 1) == 1:
-                    print(f"Your blades clash, but {ename}'s attack slips through!")
-                    print(f"{ename} deals {dmg} damage!")
-                    dmg = dmg/2
+        else:
+            if random.randint(0, 10) <= 7:
+                #The enemy attacks!
+                move = input("The enemy attacks! Pick a direction to parry, head, chest, flank, or low.")
+                enemyMove = random.choice(["head", "chest", "flank", "low"])
+                print(f"You parry {move}!")
+                print(f"The enemy attacks {enemyMove}")
+                dmg = int(max(3, pow * random.choice([1, 1, 1, 1, 1, 1, 1, 1, 1, 2]) - edf) + random.randrange(-3.9, 4.0))
+                if move.lower() in parry[move]["wins"]:
+                    print(f"You parry successfully!")
+                elif move.lower() in parry[enemyMove]["draw"]:
+                    if random.randint(0, 1) == 1:
+                        print(f"Your blades clash, but {ename}'s attack slips through!")
+                        print(f"{ename} deals {dmg} damage!")
+                        dmg = dmg/2
+                    else:
+                        print(f"You deflect the blade to the side and backflip away!")
                 else:
-                    print(f"You deflect the blade to the side and backflip away!")
-            else:
-                print(f"You just got hit.")
-            hp -= dmg
-    turn += 1
-    print(turn)
+                    print(f"You just got hit.")
+                hp -= dmg
+        turn += 1
+        print(turn)
 battle("Justin", "Anna", "An angry and annoying sister", 100, 100, 10, 10, 20, 30, 50, 50, 80, 60, ["cinder", "freeze", "heal"], ["buff", "freeze", "heal"], ["flashbang, fairy"], ["bazooka", "boomerang"], ["Anna stands atop a rock and points her sword at you. 'So weak.' "])
 
 
