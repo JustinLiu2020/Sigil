@@ -10,6 +10,7 @@ def manageSpells(move, mp):
     
     if move == "cinder":
         print("Your enemy has been set on fire.")
+        print(f"You deal {mp} dmg!")
         dmg = mp
         effect = "burn"
     elif move == "heal":
@@ -17,6 +18,7 @@ def manageSpells(move, mp):
         print(f"You've healed {round(cost / 2)} hp!")
         dmg = -round(cost / 2)
         target = "U"
+        effect = "heal"
     elif move == "buff":
         print("You buff up your attack!")
         dmg = mp
@@ -77,7 +79,6 @@ def battle(name, ename, edesc, maxhp, emaxhp, cdf, ecdf, cpow, ecpow, maxmp, ema
             "lose" : ["head"]
         }
     }
-    turn = 0
     runaway = False
     if ename[0] not in vowels:
         print(f"You've encountered a {ename}!")
@@ -118,9 +119,9 @@ def battle(name, ename, edesc, maxhp, emaxhp, cdf, ecdf, cpow, ecpow, maxmp, ema
                 move = move.lower()
                 if move in spells:
                     dmg, effect, target = manageSpells(move, int(input(f"How much mp do you spend? You have {mp} mp left.")))
-                    if move == "heal":
-                        hp += round(mp/2)
-                    if move == "buff":
+                    if effect == "heal":
+                        hp += dmg
+                    if effect == "buff":
                         pow += round(mp/2)
                         timer["1buff"] = 3
                 else:
@@ -173,6 +174,7 @@ def battle(name, ename, edesc, maxhp, emaxhp, cdf, ecdf, cpow, ecpow, maxmp, ema
                         dmg = 0
                 else:
                     print(f"You just got hit.")
+                    print(f"{ename} deals {dmg} damage!")
                 hp -= dmg
             else:
                 if not ((hp > 1.1 * pow - df + 4)):
